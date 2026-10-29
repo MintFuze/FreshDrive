@@ -1,4 +1,5 @@
 # Reference lock
+Mobile navigation refinement: four equal-width slots, including the add action, per user screenshot/request. Keep the lime action fill and use the same pill silhouette as the other items. Refero Arc Search toolbar (e06542b3-5064-4f59-b703-cb116408facd) supports a contained add action in a translucent bottom bar; slot equality is the user's explicit constraint.
 Primary: Linear (Refero 554b801c-3b31-4086-a7e5-ae613cdd618b): layered graphite surfaces, precise typography, thin borders, sparse primary accent. Adapt canvas to pure OLED black per user. Use offline system sans-serif instead of network fonts.
 Secondary: Linear changelog (11d3e58a-87d7-4a9a-bbf5-720f4fd3ffc6): restrained date labels and separated history. Exante (282f6ff5-41e7-48d1-ad18-96c32d56e44c): financial alignment and hairline structure.
 Patterns: Dime (39ebc1ed-8eb1-4710-bc27-5933c3a70574) daily groups and bottom navigation; Copilot (ae027eb7-a9b3-47eb-9003-e81d4865f693) transportation totals and weekly bars.

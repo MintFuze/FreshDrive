@@ -111,6 +111,9 @@ legend { padding: 0; margin-bottom: 12px; font-size: 14px; color: var(--muted); 
 .order-heading .trip-status { font-size: 11px; }
 .order-section { border-radius: 16px; }
 @media(max-width:760px) {
+  #nav { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; }
+  #nav > button { width: 100%; min-width: 0; }
+  #nav .nav-add { width: 100%; border-radius: 28px; }
   #trip-editor { --editor-header-height: calc(76px + env(safe-area-inset-top)); }
   #trip-editor .editor-body { padding-top: calc(var(--editor-header-height) + 20px); }
   .vehicle-choices { grid-template-columns: minmax(0,1fr); }
