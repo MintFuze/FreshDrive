@@ -1,6 +1,19 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {animateUI} from '../dist/motion.js';
+import {animateUI, originClip} from '../dist/motion.js';
+
+test('order expansion starts at the add button without scaling its content', () => {
+  assert.equal(originClip({left: 0, top: 0, width: 390, height: 844}, {left: 286, top: 762, width: 86, height: 56}),
+    'inset(762px 18px 26px 286px round 28px)');
+});
+test('expansion geometry handles offsets and safely rejects an offscreen origin', () => {
+  const surface = {left: 100, top: 50, width: 320, height: 600};
+  assert.equal(originClip(surface, {left: 90, top: 70, width: 40, height: 40}), 'inset(20px 290px 540px 0px round 20px)');
+  assert.equal(originClip(surface, {left: 500, top: 70, width: 40, height: 40}), null);
+  assert.equal(originClip(surface, {left: 110, top: 70, width: 0, height: 40}), null);
+  assert.equal(originClip(surface, {left: NaN, top: 70, width: 40, height: 40}), null);
+  assert.equal(originClip(null, null), null);
+});
 
 function element() {
   const calls = [];

@@ -1,6 +1,6 @@
 import{totalKm,calculate,validData,tripStatus,repeatTrip,summarizeTrips,validDraft}from './model.js';
 import{mountDatePicker,displayDate}from './date-picker.js';
-import{animateUI}from './motion.js';
+import{animateUI,originClip}from './motion.js';
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),id=()=>crypto.randomUUID(),num=(v,d=1)=>Number(v).toLocaleString('ru-RU',{maximumFractionDigits:d}),money=v=>num(v,2),today=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Minsk'}).format(new Date());
 const KEY='reis-local-v1';let data={version:1,cars:[],routes:[],trips:[],settings:{price:0}},page='overview',period='month',search='',storageError=false,customerFilter='',statusFilter='all';
 const undoStack=[];
@@ -207,8 +207,31 @@ function closeTripEditor(animated=false){
   if(editor.dataset.closing)return;
   editor.dataset.closing='true';
   editor.style.pointerEvents='none';
-  const animation=animateUI(editor,[{opacity:1},{opacity:0}],{duration:140,easing:'ease-in'});
+  const button=$('#nav .nav-add'),shell=editor.querySelector('.editor-shell');
+  const clip=editor.dataset.fromAdd&&button?originClip(editor.getBoundingClientRect(),button.getBoundingClientRect()):null;
+  let animation;
+  if(clip){
+    const current=getComputedStyle(editor);
+    animation=animateUI(editor,[{clipPath:current.clipPath==='none'?'inset(0px 0px 0px 0px round 0px)':current.clipPath,backgroundColor:current.backgroundColor},{clipPath:clip,backgroundColor:'#c5f277'}],{duration:260,easing:'cubic-bezier(.4,0,.6,1)'});
+    animateUI(shell,[{opacity:getComputedStyle(shell).opacity},{opacity:0}],{duration:120});
+  }else animation=animateUI(editor,[{opacity:1},{opacity:0}],{duration:140,easing:'ease-in'});
   if(animation)animation.finished.then(remove,()=>{});else remove();
 }
-function openTripEditor(title,body){closeTripEditor();document.querySelector('#dialog-body').innerHTML='';const editor=document.createElement('section');editor.id='trip-editor';editor.setAttribute('role','dialog');editor.setAttribute('aria-modal','true');editor.setAttribute('aria-label',title);editor.innerHTML='<div class="editor-shell"><header class="editor-header"><h2>'+esc(title)+'</h2><button type="button" class="icon-button editor-close" aria-label="Закрыть поездку">✕</button></header><div class="editor-body">'+body+'</div></div>';document.body.append(editor);document.querySelectorAll('main,aside').forEach(element=>element.inert=true);editor.querySelector('.editor-close').onclick=()=>closeTripEditor(true);editor.querySelector('.editor-close').focus();animateUI(editor,[{opacity:0},{opacity:1}],{duration:240})}
+function openTripEditor(title,body){
+  const fromAdd=title==='Новый заказ'&&!$('#trip-editor');
+  const button=fromAdd?$('#nav .nav-add'):null;
+  const source=button?.getBoundingClientRect();
+  closeTripEditor();$('#dialog-body').innerHTML='';
+  const editor=document.createElement('section');
+  editor.id='trip-editor';editor.setAttribute('role','dialog');editor.setAttribute('aria-modal','true');editor.setAttribute('aria-label',title);
+  editor.innerHTML='<div class="editor-shell"><header class="editor-header"><h2>'+esc(title)+'</h2><button type="button" class="icon-button editor-close" aria-label="Закрыть поездку">✕</button></header><div class="editor-body">'+body+'</div></div>';
+  document.body.append(editor);document.querySelectorAll('main,aside').forEach(element=>element.inert=true);
+  editor.querySelector('.editor-close').onclick=()=>closeTripEditor(true);editor.querySelector('.editor-close').focus();
+  const clip=source?originClip(editor.getBoundingClientRect(),source):null;
+  if(clip){
+    editor.dataset.fromAdd='true';
+    animateUI(editor,[{clipPath:clip,backgroundColor:'#c5f277'},{clipPath:'inset(0px 0px 0px 0px round 0px)',backgroundColor:'#000'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'});
+    animateUI(editor.querySelector('.editor-shell'),[{opacity:0},{opacity:0,offset:.2},{opacity:1}],{duration:360});
+  }else animateUI(editor,[{opacity:0},{opacity:1}],{duration:240});
+}
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.querySelector('#modal').open)closeTripEditor(true)});
