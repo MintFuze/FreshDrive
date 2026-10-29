@@ -1,4 +1,7 @@
 [hidden] { display: none !important; }
+body button.primary,body .form-actions > button,body .card-actions > button,body .period button,body .choice-chip,body .date-shortcuts button { border-radius: 28px; }
+body .segmented { border-radius: 28px; }
+body .segmented .segment-indicator,body .segmented > button,body .segmented > label > span { border-radius: 24px; }
 .nav-indicator { display: none; }
 #nav .add-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
 #nav .add-icon svg { display: block; width: 28px; height: 28px; stroke-width: 2; }

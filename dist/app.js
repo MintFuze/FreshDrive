@@ -212,7 +212,7 @@ function closeTripEditor(animated=false){
   let animation;
   if(clip){
     const current=getComputedStyle(editor);
-    animation=animateUI(editor,[{clipPath:current.clipPath==='none'?'inset(0px 0px 0px 0px round 0px)':current.clipPath,backgroundColor:current.backgroundColor},{clipPath:clip,backgroundColor:'#c5f277'}],{duration:260,easing:'cubic-bezier(.4,0,.6,1)'});
+    animation=animateUI(editor,[{clipPath:current.clipPath==='none'?'inset(0px 0px 0px 0px round 0px)':current.clipPath,opacity:current.opacity},{clipPath:clip,opacity:0}],{duration:220,easing:'cubic-bezier(.4,0,.6,1)'});
     animateUI(shell,[{opacity:getComputedStyle(shell).opacity},{opacity:0}],{duration:120});
   }else animation=animateUI(editor,[{opacity:1},{opacity:0}],{duration:140,easing:'ease-in'});
   if(animation)animation.finished.then(remove,()=>{});else remove();
@@ -230,8 +230,8 @@ function openTripEditor(title,body){
   const clip=source?originClip(editor.getBoundingClientRect(),source):null;
   if(clip){
     editor.dataset.fromAdd='true';
-    animateUI(editor,[{clipPath:clip,backgroundColor:'#c5f277'},{clipPath:'inset(0px 0px 0px 0px round 0px)',backgroundColor:'#000'}],{duration:380,easing:'cubic-bezier(.16,1,.3,1)'});
-    animateUI(editor.querySelector('.editor-shell'),[{opacity:0},{opacity:0,offset:.2},{opacity:1}],{duration:360});
+    animateUI(editor,[{clipPath:clip,opacity:0},{clipPath:'inset(0px 0px 0px 0px round 0px)',opacity:1}],{duration:300,easing:'cubic-bezier(.25,.65,.25,1)'});
+    animateUI(editor.querySelector('.editor-shell'),[{opacity:0},{opacity:1}],{duration:220});
   }else animateUI(editor,[{opacity:0},{opacity:1}],{duration:240});
 }
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.querySelector('#modal').open)closeTripEditor(true)});
