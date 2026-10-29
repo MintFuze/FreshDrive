@@ -1,4 +1,12 @@
 [hidden] { display: none !important; }
+@media(prefers-reduced-motion:no-preference) {
+  button { transition: background-color 120ms ease-out,border-color 120ms ease-out,color 120ms ease-out,transform 100ms ease-out; }
+  button:active { transform: scale(.97); }
+  .vehicle-choice-content,.segmented label > span,.choice-check { transition: background-color 160ms ease-out,border-color 160ms ease-out,color 160ms ease-out; }
+  details[open] > :not(summary),.date-calendar:not([hidden]),.calendar-jump:not([hidden]) { animation: panel-reveal 180ms ease-out; }
+  #toast { animation: panel-reveal 180ms ease-out; }
+  @keyframes panel-reveal { from { opacity: 0; } to { opacity: 1; } }
+}
 #trip-editor { --editor-header-height: 84px; overflow: hidden; }
 #trip-editor .editor-shell { position: relative; height: 100%; min-height: 0; }
 #trip-editor .editor-header { position: absolute; inset: 0 0 auto; z-index: 5; height: var(--editor-header-height); min-height: var(--editor-header-height); background: linear-gradient(180deg,#000e,#000b); border-bottom: 1px solid #ffffff12; backdrop-filter: blur(20px) saturate(130%); -webkit-backdrop-filter: blur(20px) saturate(130%); }

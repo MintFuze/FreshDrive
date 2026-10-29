@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 22
       - run: npm test
-      - run: node --check dist/app.js && node --check dist/model.js && node --check dist/date-picker.js && node --check dist/sw.js
+      - run: node --check dist/app.js && node --check dist/model.js && node --check dist/date-picker.js && node --check dist/motion.js && node --check dist/sw.js
       - uses: actions/configure-pages@v5
         with:
           enablement: true
