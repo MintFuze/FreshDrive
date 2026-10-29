@@ -1,1 +1,1 @@
-{"name":"freshdrive-reis","private":true,"type":"module","scripts":{"test":"node --test tests/model.test.js","start":"node preview.mjs"}}
+{"name":"freshdrive-reis","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.js","start":"node preview.mjs"}}
