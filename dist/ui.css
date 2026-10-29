@@ -3,15 +3,15 @@
 #nav .add-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
 #nav .add-icon svg { display: block; width: 28px; height: 28px; stroke-width: 2; }
 @media(max-width:760px) {
-  aside { height: 72px; padding: 6px; border-color: #ffffff24; background: linear-gradient(160deg,#ffffff12,#ffffff03),#111713bf; backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); box-shadow: inset 0 1px 0 #ffffff20,0 8px 28px #0008; }
-  #nav { position: relative; isolation: isolate; height: 58px; }
-  #nav > button { position: relative; z-index: 1; height: 58px; min-height: 58px; gap: 3px; padding: 6px 4px; border-radius: 28px; color: #aab4a8; background: transparent; border: 0; }
+  aside { height: 68px; padding: 5px; border: 1px solid #ffffff26; border-radius: 34px; background: linear-gradient(155deg,#ffffff12,#ffffff03),#171917b8; backdrop-filter: blur(28px) saturate(140%); -webkit-backdrop-filter: blur(28px) saturate(140%); box-shadow: inset 0 1px 0 #ffffff1a,0 8px 28px #0006; }
+  #nav { position: relative; isolation: isolate; height: 56px; }
+  #nav > button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 56px; min-height: 56px; gap: 3px; padding: 6px 4px; border-radius: 28px; color: #b2b8b0; background: transparent; border: 0; }
   #nav > button.active { background: transparent; box-shadow: none; color: #d4f7a4; }
-  #nav .nav-indicator { display: block; position: absolute; z-index: 0; left: 0; top: 0; height: 100%; width: calc((100% - 12px)/4); border: 1px solid #ffffff1c; border-radius: 28px; background: linear-gradient(150deg,#ffffff16,#ffffff08); box-shadow: inset 0 1px 0 #ffffff16,0 2px 8px #0002; pointer-events: none; transform: translateX(calc(var(--nav-index,0) * (100% + 4px))); }
-  #nav .nav-icon { width: 22px; height: 22px; flex-basis: 22px; transform: translateY(0) scale(.95); }
-  #nav .nav-icon svg { width: 22px; height: 22px; stroke-width: 1.8; }
-  #nav .nav-label { font-size: 11px; line-height: 14px; font-weight: 500; opacity: .85; }
-  #nav .active .nav-icon { transform: translateY(-1px) scale(1.04); }
+  #nav .nav-indicator { display: block; position: absolute; z-index: 0; left: 0; top: 0; height: 100%; width: calc((100% - 12px)/4); border: 0; border-radius: 28px; background: #ffffff12; box-shadow: inset 0 1px 0 #ffffff10; pointer-events: none; transform: translateX(calc(var(--nav-index,0) * (100% + 4px))); }
+  #nav .nav-icon { width: 24px; height: 24px; flex: 0 0 24px; transform: none; }
+  #nav .nav-icon svg { width: 24px; height: 24px; stroke-width: 1.8; }
+  #nav .nav-label { display: block; font-size: 11px; line-height: 13px; font-weight: 500; letter-spacing: 0; white-space: nowrap; opacity: .9; }
+  #nav .active .nav-icon { transform: none; }
   #nav .active .nav-label { opacity: 1; }
   #nav .nav-add { border-radius: 28px; background: linear-gradient(150deg,#d4fa91,#bce975) !important; box-shadow: inset 0 1px 0 #ffffff65,0 2px 8px #0002; }
   #nav > button:active { transform: scale(.95); }
@@ -169,6 +169,7 @@ legend { padding: 0; margin-bottom: 12px; font-size: 14px; color: var(--muted); 
   .trip-card { padding: 17px; }
 }
 @media(max-width:360px) {
+  #nav .nav-label { font-size: 10px; }
   .date-shortcuts { gap: 6px; }
   .date-shortcuts button { font-size: 12px; padding: 8px 4px; }
   .calendar-grid .calendar-day { min-height: 40px; }
