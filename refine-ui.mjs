@@ -1,0 +1,14 @@
+import{readFile,writeFile}from'node:fs/promises';let s=await readFile('dist/app.js','utf8');
+s=s.replace("items.map(([v,i,l])=>", "items.filter(([v])=>!['cars','routes'].includes(v)).map(([v,i,l])=>");
+s=s.replace('<div class="eyebrow">FRESHDRIVE / ПОЛЕВОЙ ЖУРНАЛ</div>','');
+s=s.replace('<h1>${title}</h1><p>${sub}</p>','<h1>${title}</h1>');
+s=s.replace("heading('Каждый рейс на счету.'", "heading('Обзор'");
+s=s.replace('<div class="stat-note">${n}</div>','');
+s=s.replace('<p class="panel-sub">Километры по дням</p>','');
+s=s.replace('<p class="panel-sub">Расход настроите один раз.</p>','');
+s=s.replace('Расход настроите один раз.','');
+s=s.replace('Добавим вашу машину?','Нет машины');
+s=s.replace("+`<div class=\"panel settings-block\"><h2>Цена топлива", "+`<div class=\"panel settings-block settings-links\"><button class=\"quiet\" data-page=\"cars\"><span>▱ Машины</span><span>↗</span></button><button class=\"quiet\" data-page=\"routes\"><span>⌁ Маршруты</span><span>↗</span></button></div><div class=\"panel settings-block\"><h2>Цена топлива");
+await writeFile('dist/app.js',s);
+let css=await readFile('dist/style.css','utf8');css+=`\n/* Minimal chrome and floating glass navigation, per user direction. */\nheader,footer,.sidebar-caption,.aside-bottom,.brand{display:none}#content{padding-top:32px}.page-heading p{display:none}.panel-sub{margin-top:8px}.settings-links{padding:8px}.settings-links button{display:flex;justify-content:space-between;width:100%;font-size:16px;border:0;padding:16px}.settings-links button+button{border-top:1px solid var(--border);border-radius:0}h1{margin:0}.stat-number{margin-bottom:0}aside{padding-top:32px}.eyebrow{display:none}\n@media(max-width:760px){aside{width:min(340px,calc(100% - 40px));height:67px;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));top:auto;transform:translateX(-50%);padding:5px;border:1px solid #ffffff30;border-radius:36px;background:linear-gradient(145deg,#ffffff18,#ffffff05),#111a;backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%);box-shadow:inset 0 1px 0 #ffffff28,inset 0 -1px 0 #ffffff0c,0 10px 35px #0009}nav{height:55px}nav button{min-height:54px;border-radius:28px;font-size:10px;padding:4px 12px;gap:1px;color:#b8beb8}nav button.active{background:linear-gradient(150deg,#ffffff20,#ffffff0b);box-shadow:inset 0 1px 0 #ffffff15;color:#d4f7a4}main{padding-bottom:105px}#content{padding-top:28px}.page-heading{align-items:center;margin-bottom:25px}.page-heading>.primary{font-size:12px}h1{font-size:28px}}\n`;
+await writeFile('dist/style.css',css);let sw=await readFile('dist/sw.js','utf8');await writeFile('dist/sw.js',sw.replace('reis-shell-v2','reis-shell-v3'));
